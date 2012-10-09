@@ -28,6 +28,9 @@ from bento.commands.build \
 from bento.commands.build_egg \
     import \
         BuildEggCommand
+from bento.commands.build_wheel \
+    import \
+        BuildWheelCommand
 from bento.commands.build_pkg_info \
     import \
         BuildPkgInfoCommand
@@ -132,6 +135,7 @@ def register_commands(global_context):
     global_context.register_command("convert", ConvertCommand())
     global_context.register_command("sdist", SdistCommand())
     global_context.register_command("build_egg", BuildEggCommand())
+    global_context.register_command("build_wheel", BuildWheelCommand())
     global_context.register_command("build_wininst", BuildWininstCommand())
     global_context.register_command("sphinx", SphinxCommand())
     global_context.register_command("register_pypi", RegisterPyPI())
@@ -243,6 +247,7 @@ def main(argv=None):
     if not popts.disable_autoconfigure:
         global_context.set_before("build", "configure")
     global_context.set_before("build_egg", "build")
+    global_context.set_before("build_wheel", "build")
     global_context.set_before("build_wininst", "build")
     global_context.set_before("install", "build")
 
